@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27574078376",
+    "project_id": "courceprojectiq",
+    "storage_bucket": "courceprojectiq.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27574078376:android:e6304051bd963e50c82b9d",
+        "android_client_info": {
+          "package_name": "com.HWProject.CourceProjectIQ"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27574078376-up1dihg622o42q3ofd5a315hqp2at08a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN7-C0VutvjutvBbjwQc6FXcUfdveDbt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27574078376-up1dihg622o42q3ofd5a315hqp2at08a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
