@@ -1,8 +1,9 @@
 using Firebase.Auth;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Authorization : MonoBehaviour
+public class AuthorizationModule : MonoBehaviour
 {
     private FirebaseAuth _auth;
     private FirebaseUser _user;
@@ -47,7 +48,7 @@ public class Authorization : MonoBehaviour
         _auth.StateChanged -= AuthStateChanged;
         _auth = null;
     }
-    public void CreateUser(string email, string password)
+    public void CreateUser(string email, string password, UnityAction onCreated)
     {
         _auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -64,11 +65,12 @@ public class Authorization : MonoBehaviour
 
             // Firebase _user has been created.
             Firebase.Auth.FirebaseUser newUser = task.Result;
+            SignIn(email, password, onCreated);
             Debug.LogFormat("Firebase _user created successfully: {0} ({1})",
-                newUser.DisplayName, newUser.UserId);
+            newUser.DisplayName, newUser.UserId);
         });
     }
-    public void SignIn(string email, string password)
+    public void SignIn(string email, string password, UnityAction onSignIn)
     {
         _auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -84,6 +86,7 @@ public class Authorization : MonoBehaviour
             }
 
             Firebase.Auth.FirebaseUser newUser = task.Result;
+            onSignIn?.Invoke();
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
         });
