@@ -59,7 +59,10 @@ public class AuthorizationModule : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                if ("One or more errors occurred. (One or more errors occurred. (The given password is invalid.))"== task.Exception.Message)
+                {
+                    Debug.Log("мебепмши оюпнкэ");
+                }
                 return;
             }
 

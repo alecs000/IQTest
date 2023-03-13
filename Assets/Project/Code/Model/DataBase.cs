@@ -17,12 +17,12 @@ public class DataBase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _userID = authorization.User.UserId;
         _referenceDataBase = FirebaseDatabase.GetInstance("https://courceprojectiq-default-rtdb.asia-southeast1.firebasedatabase.app/").RootReference;
     }
 
     public void CreateUser(string username)
     {
+        _userID = authorization.User.UserId;
         User user = new User(username);
         string json = JsonUtility.ToJson(user);
         _referenceDataBase.Child(Users).Child(_userID).SetRawJsonValueAsync(json);
