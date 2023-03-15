@@ -1,9 +1,19 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class CanvasSetter
 {
     private CanvasGroup _curentCanvas;
+    private float _duration;
+
+    public CanvasSetter(CanvasGroup curentCanvas, float duration)
+    {
+        SetCanvasGroup(curentCanvas);
+        _duration = duration;
+    }
+
     public CanvasGroup CurentCanvas => _curentCanvas;
+
     public void SetCanvasGroup(CanvasGroup newGroup)
     {
         if (_curentCanvas != null)
@@ -13,7 +23,7 @@ public class CanvasSetter
             _curentCanvas.blocksRaycasts = false;
         }
         _curentCanvas = newGroup;
-        _curentCanvas.alpha = 1;
+        _curentCanvas.DOFade(1, _duration);
         _curentCanvas.interactable = true;
         _curentCanvas.blocksRaycasts = true;
     }

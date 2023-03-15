@@ -1,3 +1,4 @@
+using Firebase;
 using Firebase.Auth;
 using System;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ public class AuthorizationModule : MonoBehaviour
         _auth.StateChanged -= AuthStateChanged;
         _auth = null;
     }
-    public void CreateUser(string email, string password, UnityAction onCreatedAndEmailVerified)
+    public void CreateUser(string email, string password, UnityAction onCreatedAndEmailVerified, UnityAction<AuthError> onFailed)
     {
         _auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -63,10 +64,8 @@ public class AuthorizationModule : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                if ("One or more errors occurred. (One or more errors occurred. (The given password is invalid.))" == task.Exception.Message)
-                {
-                    Debug.Log("мебепмши оюпнкэ");
-                }
+                AuthError error = (AuthError)(task.Exception.GetBaseException() as FirebaseException).ErrorCode;
+                onFailed?.Invoke(error);
                 return;
             }
             // Firebase _user has been created.
