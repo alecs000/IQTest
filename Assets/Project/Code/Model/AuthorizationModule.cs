@@ -1,5 +1,6 @@
 using Firebase.Auth;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,9 @@ public class AuthorizationModule : MonoBehaviour
     private Uri _photoUrl;
 
     public FirebaseUser User => _user;
+
+    private bool _isEmailSentButNotVerified;
+    private UnityAction _onEmailVerified;
     private void Awake()
     {
         InitializeFirebase();
@@ -48,7 +52,7 @@ public class AuthorizationModule : MonoBehaviour
         _auth.StateChanged -= AuthStateChanged;
         _auth = null;
     }
-    public void CreateUser(string email, string password, UnityAction onCreated)
+    public void CreateUser(string email, string password, UnityAction onCreatedAndEmailVerified)
     {
         _auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -59,19 +63,51 @@ public class AuthorizationModule : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                if ("One or more errors occurred. (One or more errors occurred. (The given password is invalid.))"== task.Exception.Message)
+                if ("One or more errors occurred. (One or more errors occurred. (The given password is invalid.))" == task.Exception.Message)
                 {
                     Debug.Log("ÍÅÂÅÐÍÛÉ ÏÀÐÎËÜ");
                 }
                 return;
             }
-
             // Firebase _user has been created.
             Firebase.Auth.FirebaseUser newUser = task.Result;
-            SignIn(email, password, onCreated);
+            SendEmail(onCreatedAndEmailVerified);
+            _isEmailSentButNotVerified = true;
             Debug.LogFormat("Firebase _user created successfully: {0} ({1})",
             newUser.DisplayName, newUser.UserId);
         });
+    }
+    public void SendEmail(UnityAction onEmailVerified)
+    {
+        if (_user != null)
+        {
+            _user.SendEmailVerificationAsync().ContinueWith(task => {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("SendEmailVerificationAsync was canceled.");
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("SendEmailVerificationAsync encountered an error: " + task.Exception);
+                    return;
+                }
+                _onEmailVerified += onEmailVerified;
+                Debug.Log("Email sent successfully.");
+            });
+        }
+    }
+    private void Update()
+    {
+        if (_isEmailSentButNotVerified)
+        {
+            _user.ReloadAsync();
+            if (_user.IsEmailVerified)
+            {
+                _onEmailVerified?.Invoke();
+                _isEmailSentButNotVerified = false;
+            }
+        }
     }
     public void SignIn(string email, string password, UnityAction onSignIn)
     {
@@ -91,7 +127,7 @@ public class AuthorizationModule : MonoBehaviour
             Firebase.Auth.FirebaseUser newUser = task.Result;
             onSignIn?.Invoke();
             Debug.LogFormat("User signed in successfully: {0} ({1})",
-                newUser.DisplayName, newUser.UserId);
+            newUser.DisplayName, newUser.UserId);
         });
     }
 }
