@@ -1,10 +1,6 @@
-using Firebase.Auth;
 using Firebase.Database;
-using Firebase.Extensions;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using UnityEngine;
 
 public class DataBase : MonoBehaviour
@@ -14,17 +10,43 @@ public class DataBase : MonoBehaviour
     private string _userID;
     private DatabaseReference _referenceDataBase;
     private User _currentUser;
-    // Start is called before the first frame update
     void Start()
     {
         _referenceDataBase = FirebaseDatabase.GetInstance("https://courceprojectiq-default-rtdb.asia-southeast1.firebasedatabase.app/").RootReference;
     }
-
+    public void RefreshUserData(string answer, UserInformation userInformation)
+    {
+        switch (userInformation)
+        {
+            case UserInformation.FieldOfKnowledge:
+                _currentUser.FieldOfKnowledge = answer;
+                break;
+            case UserInformation.FamilyStatus:
+                _currentUser.FamilyStatus = answer;
+                break;
+            case UserInformation.HealthStatus:
+                _currentUser.HealthStatus = answer;
+                break;
+            case UserInformation.MaritalStatus:
+                _currentUser.MaritalStatus = answer;
+                break;
+            case UserInformation.SphereOfKnowledge:
+                _currentUser.SphereOfKnowledge = answer;
+                break;
+            case UserInformation.TypeOfPerception:
+                _currentUser.TypeOfPerception = answer;
+                break;
+            case UserInformation.SpiritualStatus:
+                _currentUser.SpiritualStatus = answer;
+                break;
+        }
+        AddData();
+    }
     public void CreateUser(string username)
     {
         _userID = authorization.User.UserId;
-        User user = new User(username);
-        string json = JsonUtility.ToJson(user);
+        _currentUser = new User(username);
+        string json = JsonUtility.ToJson(_currentUser);
         _referenceDataBase.Child(Users).Child(_userID).SetRawJsonValueAsync(json);
     }
     public void AddData()
@@ -37,9 +59,9 @@ public class DataBase : MonoBehaviour
     {
         var userData = _referenceDataBase.Child(Users).Child(_userID).Child(parameter).GetValueAsync();
         yield return new WaitUntil(() => userData.IsCompleted);
-        if (userData!=null)
-        { 
+        if (userData != null)
+        {
             onValueReceived?.Invoke((string)userData.Result.Value);
         }
-    } 
+    }
 }
