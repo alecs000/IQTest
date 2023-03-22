@@ -13,7 +13,7 @@ public class TimerForRetry : MonoBehaviour
 
     private TimeSpan timeRemaning;
 
-    private void StartTimer()
+    public void StartTimer()
     {
         retryButton.interactable = false;
         timeRemaning = timeBeforeRetry;

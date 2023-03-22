@@ -12,8 +12,9 @@ public class ViewSwitch : MonoBehaviour
     {
         _canvasSetter = new(startCanvasGroup, duration);
     }
-    private void Switch(CanvasGroup canvasGroup)
+    public void Switch(UIView view)
     {
-        _canvasSetter.SetCanvasGroup(canvasGroup);
+        _canvasSetter.SetCanvasGroup(view.CanvasGroupUIView);
+        view.Initialize();
     }
 }

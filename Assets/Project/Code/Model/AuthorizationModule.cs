@@ -2,6 +2,7 @@ using Firebase;
 using Firebase.Auth;
 using System;
 using System.Threading.Tasks;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -108,7 +109,7 @@ public class AuthorizationModule : MonoBehaviour
             }
         }
     }
-    public void SignIn(string email, string password, UnityAction onSignIn)
+    public void SignIn(string email, string password, UnityAction onSignIn, UnityAction<AuthError> onFailed)
     {
         _auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
@@ -119,7 +120,8 @@ public class AuthorizationModule : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                onFailed?.Invoke((AuthError)(task.Exception.GetBaseException() as FirebaseException).ErrorCode);
+                //Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
 
