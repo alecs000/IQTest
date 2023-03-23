@@ -1,32 +1,25 @@
-using Firebase.Auth;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Profiling;
 
-public class LoginView : UIView
+public class ResetPasswordView : UIView
 {
-    [SerializeField] private CanvasGroup error;
     [SerializeField] private UIView registration;
-    [SerializeField] private UIView profile;
-    [SerializeField] private UIView reset;
+    [SerializeField] private UIView resetSendedNotification;
+    [SerializeField] private CanvasGroup error;
     [SerializeField] private ViewSwitch viewSwitch;
-
 
     public override void Initialize()
     {
+        
     }
     public void GoToRegistration()
     {
         viewSwitch.Switch(registration);
     }
-    public void GoToProfile()
+    public void GoToResetSendedNotification()
     {
-        viewSwitch.Switch(profile);
-    }
-    public void GoToReset()
-    {
-        viewSwitch.Switch(reset);
+        viewSwitch.Switch(resetSendedNotification);
     }
     public void ShowError()
     {

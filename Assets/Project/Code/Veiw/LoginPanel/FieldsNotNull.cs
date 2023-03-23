@@ -6,23 +6,34 @@ using UnityEngine.UI;
 public class FieldsNotNull : MonoBehaviour
 {
     [SerializeField] private Button loginButton;
-    private bool _isEmailNotNull;
-    private bool _isPassNotNull;
-    public void OnEmailChanged(string email)
+    [SerializeField] private InputFieldWithoutNull[] inputFields;
+    private Dictionary<InputFieldWithoutNull, bool> inputFieldsAndValues;
+    private void Start()
     {
-        if(email.Length>0)
-            _isEmailNotNull = true;
-        TryActivateButton();
+        inputFieldsAndValues = new();
+        foreach (var item in inputFields)
+        {
+            inputFieldsAndValues.Add(item, false);
+            item.AddObserver(OnFieldChanged);
+        }
     }
-    public void OnPasswordChanged(string pass)
+    public void OnFieldChanged(InputFieldWithoutNull inputField, bool isNull)
     {
-        if (pass.Length > 0)
-            _isPassNotNull = true;
+        inputFieldsAndValues[inputField] = isNull;
         TryActivateButton();
     }
     private void TryActivateButton()
     {
-        if (_isEmailNotNull && _isPassNotNull)
+        bool isAllFieldsFulled = true;
+        foreach (var item in inputFieldsAndValues)
+        {
+            if (!item.Value)
+            {
+                isAllFieldsFulled = false;
+                break;
+            }
+        }
+        if (isAllFieldsFulled)
             loginButton.interactable = true;
         else
             loginButton.interactable = false;

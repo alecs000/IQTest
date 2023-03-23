@@ -3,33 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class Login : MonoBehaviour
 {
     [SerializeField] private AuthorizationModule authorizationModule;
     [SerializeField] private TMP_InputField emailInput;
     [SerializeField] private TMP_InputField passwordInput;
-    [SerializeField] private CanvasGroup error;
-    [SerializeField] private UIView registration;
-    [SerializeField] private UIView profile;
-    [SerializeField] private ViewSwitch viewSwitch;
+    [SerializeField] private LoginView loginView;
     
     public void LoginIn()
     {
         authorizationModule.SignIn(emailInput.text, passwordInput.text, OnLogin, OnLoginFailed);
-        CanvasSetter.TurnOffCanvasGroup(error);
     }
-    public void GoToRegistration()
+    public void OnLogin()
     {
-        viewSwitch.Switch(registration);
+        loginView.GoToProfile();
     }
-    private void OnLogin()
+    public void OnLoginFailed(AuthError error)
     {
-        viewSwitch.Switch(profile);
+        loginView.ShowError();
     }
-    private void OnLoginFailed(AuthError error)
-    {
-        CanvasSetter.TurnOnCanvasGroup(this.error);
-    }
-
 }

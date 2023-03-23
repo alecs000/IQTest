@@ -131,4 +131,24 @@ public class AuthorizationModule : MonoBehaviour
             newUser.DisplayName, newUser.UserId);
         });
     }
+    public void SendEmailReset(string emailAddress, UnityAction onCompleted, UnityAction<AuthError> onFailed)
+    {
+        if (_user != null)
+        {
+            _auth.SendPasswordResetEmailAsync(emailAddress).ContinueWith(task => {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("SendPasswordResetEmailAsync was canceled.");
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    onFailed?.Invoke((AuthError)(task.Exception.GetBaseException() as FirebaseException).ErrorCode);
+                    return;
+                }
+
+                onCompleted?.Invoke();
+            });
+        }
+    }
 }

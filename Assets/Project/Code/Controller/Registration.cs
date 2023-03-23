@@ -12,10 +12,7 @@ public class Registration : MonoBehaviour
     [SerializeField] private TMP_InputField emailInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private ErrorRegistration errorRegistration;
-    [SerializeField] private UIView waitVerificationView;
-    [SerializeField] private UIView surveyNotificationView;
-    [SerializeField] private UIView loginView;
-    [SerializeField] private ViewSwitch viewSwitch;
+    [SerializeField] private RegistrationView registrationView;
 
     [Header("Module")]
     [SerializeField] private AuthorizationModule authorization;
@@ -23,16 +20,12 @@ public class Registration : MonoBehaviour
     public void OnRegistrationClick()
     {
         authorization.CreateUser(emailInput.text, passwordInput.text, OnUserCreated, OnFailed);
-        viewSwitch.Switch(waitVerificationView);
-    }
-    public void GoToLogin()
-    {
-        viewSwitch.Switch(loginView);
+        registrationView.GoToWaitVerification();
     }
     private void OnUserCreated()
     {
         dataBase.CreateUser(nameInput.text);
-        viewSwitch.Switch(surveyNotificationView);
+        registrationView.GoToSurveyNotification();
     }
     private void OnFailed(AuthError error)
     {
