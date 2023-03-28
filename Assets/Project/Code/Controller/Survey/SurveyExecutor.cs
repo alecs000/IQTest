@@ -9,6 +9,8 @@ public class SurveyExecutor : BankDefault
     [SerializeField] private DataBase dataBase;
     private int _curentQuestionIndex;
     public QuestionScriptableObject CurentQuestion => questions[_curentQuestionIndex];
+    public int CurentQuestionIndex => _curentQuestionIndex;
+    public int LastQuestionIndex => questions.Length -1;
     public QuestionScriptableObject InitializeFirstQuestion()
     {
         _curentQuestionIndex = 0;

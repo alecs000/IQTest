@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
-public class CustomToggle : MonoBehaviour, IObservable<UnityAction<CustomToggle,bool>>
+public class CustomToggle : MonoBehaviour, IObservable<UnityAction<CustomToggle, bool>>
 {
     [SerializeField] private Toggle toggle;
     [SerializeField] private Text lable;

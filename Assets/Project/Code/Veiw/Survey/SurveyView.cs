@@ -9,11 +9,14 @@ public class SurveyView : UIView
     [SerializeField] private TMP_Text questionText;
     [SerializeField] private CustomToggle[] toggles;
     [SerializeField] private SurveyExecutor surveyExecutor;
+    [SerializeField] private CanvasGroup nextButton;
+    [SerializeField] private CanvasGroup finishButton;
 
     private SurveyChoiseLogic _surveyChoiseLogic;
     private void Start()
     {
         _surveyChoiseLogic = new(toggles);
+        Initialize();
     }
     public override void Initialize()
     {
@@ -24,7 +27,16 @@ public class SurveyView : UIView
     public void NextQuestion()
     {
         QuestionScriptableObject question = surveyExecutor.SwitchQuestionToNext(_surveyChoiseLogic.CurrentToggle.Lable.text);
+        if (surveyExecutor.CurentQuestionIndex == surveyExecutor.CurentQuestionIndex)
+        {
+            nextButton.gameObject.SetActive(false);
+            CanvasSetter.TurnOnCanvasGroup(finishButton);
+        }
         UpdateText(question);
+    }
+    public void OnSurveyFinidhed()
+    {
+
     }
     private void UpdateText(QuestionScriptableObject question)
     {

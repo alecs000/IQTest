@@ -30,9 +30,6 @@ public class DataBase : MonoBehaviour
             case UserInformation.MaritalStatus:
                 _currentUser.MaritalStatus = answer;
                 break;
-            case UserInformation.SphereOfKnowledge:
-                _currentUser.SphereOfKnowledge = answer;
-                break;
             case UserInformation.TypeOfPerception:
                 _currentUser.TypeOfPerception = answer;
                 break;

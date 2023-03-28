@@ -4,12 +4,14 @@ using UnityEngine;
 public class CanvasSetter
 {
     private CanvasGroup _curentCanvas;
-    private float _duration;
+    private float _durationForView;
+    private static float _durationForSeparateUIElement;
 
-    public CanvasSetter(CanvasGroup curentCanvas, float duration)
+    public CanvasSetter(CanvasGroup curentCanvas, float durationForView, float durationForSeparateUIElement = 0.3f)
     {
         SetCanvasGroup(curentCanvas);
-        _duration = duration;
+        _durationForView = durationForView;
+        _durationForSeparateUIElement = durationForSeparateUIElement;
     }
 
     public CanvasGroup CurentCanvas => _curentCanvas;
@@ -19,13 +21,11 @@ public class CanvasSetter
         if (_curentCanvas != null)
         {
             _curentCanvas.alpha = 0;
-            _curentCanvas.interactable = false;
-            _curentCanvas.blocksRaycasts = false;
+            _curentCanvas.gameObject.SetActive(false);
         }
         _curentCanvas = newGroup;
-        _curentCanvas.DOFade(1, _duration);
-        _curentCanvas.interactable = true;
-        _curentCanvas.blocksRaycasts = true;
+        _curentCanvas.gameObject.SetActive(true);
+        _curentCanvas.DOFade(1, _durationForView);
     }
     /// <summary>
     /// Use only with separate UI element.
@@ -33,16 +33,14 @@ public class CanvasSetter
     public static void TurnOffCanvasGroup(CanvasGroup group)
     {
         group.alpha = 0;
-        group.interactable = false;
-        group.blocksRaycasts = false;
+        group.gameObject.SetActive(false);
     }
     /// <summary>
     /// Use only with separate UI element
     /// </summary>
     public static void TurnOnCanvasGroup(CanvasGroup group)
     {
-        group.alpha = 1;
-        group.interactable = true;
-        group.blocksRaycasts = true;
+        group.gameObject.SetActive(true);
+        group.DOFade(1, _durationForSeparateUIElement);
     }
 }

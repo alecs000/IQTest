@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a031aed31239c840ad9b61683206ee2, type: 3}
-  m_Name: SecondQuestionScriptableObject
+  m_Name: FourthQuestionScriptableObject 3
   m_EditorClassIdentifier: 
-  question: "\u0423 \u0432\u0430\u0441 \u043F\u043E\u043B\u043D\u0430\u044F \u0441\u0435\u043C\u044C\u044F?"
+  question: "\u0412\u044B \u0432\u0437\u043E\u043B\u043D\u043E\u0432\u0430\u043D\u043D\u044B?"
   answers:
   - "\u0414\u0430"
-  - "\u041D\u0435\u043F\u043E\u043B\u043D\u0430\u044F"
-  - "\u0421\u0438\u0440\u043E\u0442\u0430"
-  answersInformation: 1
+  - "\u041D\u0435\u0442"
+  answersInformation: 6

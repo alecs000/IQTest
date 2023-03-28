@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class ErrorRegistration : MonoBehaviour
@@ -25,7 +22,7 @@ public class ErrorRegistration : MonoBehaviour
             _isPanelActive = true;
             _isErrorActiveButNotShow = false;
         }
-        if (_isPanelActive && Input.touchCount>0)
+        if (_isPanelActive && Input.touchCount > 0)
         {
             if (Input.touches[0].phase == TouchPhase.Began)
             {

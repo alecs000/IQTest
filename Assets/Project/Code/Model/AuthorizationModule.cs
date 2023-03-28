@@ -1,8 +1,6 @@
 using Firebase;
 using Firebase.Auth;
 using System;
-using System.Threading.Tasks;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -81,7 +79,8 @@ public class AuthorizationModule : MonoBehaviour
     {
         if (_user != null)
         {
-            _user.SendEmailVerificationAsync().ContinueWith(task => {
+            _user.SendEmailVerificationAsync().ContinueWith(task =>
+            {
                 if (task.IsCanceled)
                 {
                     Debug.LogError("SendEmailVerificationAsync was canceled.");
@@ -135,7 +134,8 @@ public class AuthorizationModule : MonoBehaviour
     {
         if (_user != null)
         {
-            _auth.SendPasswordResetEmailAsync(emailAddress).ContinueWith(task => {
+            _auth.SendPasswordResetEmailAsync(emailAddress).ContinueWith(task =>
+            {
                 if (task.IsCanceled)
                 {
                     Debug.LogError("SendPasswordResetEmailAsync was canceled.");

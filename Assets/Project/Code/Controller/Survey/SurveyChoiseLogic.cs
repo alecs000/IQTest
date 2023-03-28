@@ -24,12 +24,10 @@ public class SurveyChoiseLogic
             if (_currentToggle!=null)
             {
                 _currentToggle.Toggle.isOn = false;
+                _currentToggle.Toggle.interactable = true;
             }
             _currentToggle = newToggle;
-        }
-        else
-        {
-            _currentToggle.Toggle.isOn = true;
+            _currentToggle.Toggle.interactable = false;
         }
     }
 }
