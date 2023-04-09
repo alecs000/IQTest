@@ -17,6 +17,16 @@ public class SurveyChoiseLogic
             item.AddObserver(OnToggleValueChange);
         }
     }
+    public void RefreshToggle()
+    {
+        if (CurrentToggle!= null)
+        {
+            Toggle currentToggle = _currentToggle.Toggle;
+            _currentToggle = null;
+            currentToggle.isOn = false;
+            currentToggle.interactable = true;
+        }
+    }
     private void OnToggleValueChange(CustomToggle newToggle, bool value)
     {
         if (value)

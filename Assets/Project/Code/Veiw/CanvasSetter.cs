@@ -1,8 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CanvasSetter
 {
+
     private CanvasGroup _curentCanvas;
     private float _durationForView;
     private static float _durationForSeparateUIElement;
@@ -43,4 +45,5 @@ public class CanvasSetter
         group.gameObject.SetActive(true);
         group.DOFade(1, _durationForSeparateUIElement);
     }
+
 }

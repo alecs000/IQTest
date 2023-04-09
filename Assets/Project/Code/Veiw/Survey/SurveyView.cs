@@ -15,30 +15,47 @@ public class SurveyView : UIView
     private SurveyChoiseLogic _surveyChoiseLogic;
     private void Start()
     {
-        _surveyChoiseLogic = new(toggles);
         Initialize();
     }
     public override void Initialize()
     {
-        QuestionScriptableObject question = surveyExecutor.InitializeFirstQuestion();
+        _surveyChoiseLogic = new(toggles);
+        SurveyQuestionScriptableObject question = surveyExecutor.InitializeFirstQuestion();
         UpdateText(question);
     }
-
+    public void PreviousQuestion()
+    {
+        if (surveyExecutor.CurentQuestionIndex<1)
+            return;
+        SurveyQuestionScriptableObject question = surveyExecutor.SwitchQuestionToPrevious();
+        CanvasSetter.TurnOnCanvasGroup(nextButton);
+        CanvasSetter.TurnOffCanvasGroup(finishButton);
+        _surveyChoiseLogic.RefreshToggle();
+        UpdateText(question);
+    }
     public void NextQuestion()
     {
-        QuestionScriptableObject question = surveyExecutor.SwitchQuestionToNext(_surveyChoiseLogic.CurrentToggle.Lable.text);
-        if (surveyExecutor.CurentQuestionIndex == surveyExecutor.CurentQuestionIndex)
+        if (_surveyChoiseLogic.CurrentToggle == null)
+            return;
+        surveyExecutor.SendDataInDataBase(_surveyChoiseLogic.CurrentToggle.Lable.text);
+        SurveyQuestionScriptableObject question = surveyExecutor.SwitchQuestionToNext();
+        TryLastQuestionButtonActivate();
+        _surveyChoiseLogic.RefreshToggle();
+        UpdateText(question);
+    }
+    private void TryLastQuestionButtonActivate()
+    {
+        if (surveyExecutor.LastQuestionIndex == surveyExecutor.CurentQuestionIndex)
         {
-            nextButton.gameObject.SetActive(false);
+            CanvasSetter.TurnOffCanvasGroup(nextButton);
             CanvasSetter.TurnOnCanvasGroup(finishButton);
         }
-        UpdateText(question);
     }
     public void OnSurveyFinidhed()
     {
-
+        surveyExecutor.SendDataInDataBase(_surveyChoiseLogic.CurrentToggle.Lable.text);
     }
-    private void UpdateText(QuestionScriptableObject question)
+    private void UpdateText(SurveyQuestionScriptableObject question)
     {
         questionText.text = question.Question;
         for (int i = 0; i < toggles.Length; i++)

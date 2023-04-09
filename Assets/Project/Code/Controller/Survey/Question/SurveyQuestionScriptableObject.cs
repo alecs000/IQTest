@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestionScriptableObject", menuName = "ScriptableObjects/QuestionScriptableObject")]
-public class QuestionScriptableObject : ScriptableObject
+[CreateAssetMenu(fileName = "SurveyQuestionScriptableObject", menuName = "ScriptableObjects/SurveyQuestionScriptableObject")]
+public class SurveyQuestionScriptableObject : ScriptableObject
 {
     [SerializeField] private string question;
     [SerializeField] private string[] answers;

@@ -11,8 +11,6 @@ public class LoginView : UIView
     [SerializeField] private UIView profile;
     [SerializeField] private UIView reset;
     [SerializeField] private ViewSwitch viewSwitch;
-
-
     public override void Initialize()
     {
     }

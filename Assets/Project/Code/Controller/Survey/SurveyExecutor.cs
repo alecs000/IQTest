@@ -3,32 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurveyExecutor : BankDefault
+public class SurveyExecutor : DefaultTestLogic<SurveyQuestionScriptableObject>
 {
-    [SerializeField] private QuestionScriptableObject[] questions;
+    private const string SurveyText = "Survey";
     [SerializeField] private DataBase dataBase;
-    private int _curentQuestionIndex;
-    public QuestionScriptableObject CurentQuestion => questions[_curentQuestionIndex];
-    public int CurentQuestionIndex => _curentQuestionIndex;
-    public int LastQuestionIndex => questions.Length -1;
-    public QuestionScriptableObject InitializeFirstQuestion()
+    public override SurveyQuestionScriptableObject InitializeFirstQuestion()
     {
-        _curentQuestionIndex = 0;
-        return CurentQuestion;
+        SurveyQuestionScriptableObject curentQuestion = base.InitializeFirstQuestion();
+        if (PlayerPrefs.HasKey(SurveyText))
+        {
+            _curentQuestionIndex = PlayerPrefs.GetInt(SurveyText);
+        }
+        return curentQuestion;
     }
-    public QuestionScriptableObject SwitchQuestionToNext(string answer)
+    public void SendDataInDataBase(string answerInSurvey)
     {
-        if (answer == null|| answer==string.Empty)
+        if (answerInSurvey == null || answerInSurvey == string.Empty)
         {
             throw new Exception("Answer can`t be null or empty");
         }
-        dataBase.RefreshUserData(answer, CurentQuestion.AnswersInformation);
-        _curentQuestionIndex++;
-        return CurentQuestion;
+        dataBase.RefreshUserData(answerInSurvey, CurentQuestion.AnswersInformation);
     }
-    public QuestionScriptableObject SwitchQuestionToPrevious()
+    public override SurveyQuestionScriptableObject SwitchQuestionToNext()
     {
-        _curentQuestionIndex--;
-        return CurentQuestion;
+        SurveyQuestionScriptableObject curentQuestion = base.SwitchQuestionToNext();
+        PlayerPrefs.SetInt(SurveyText, _curentQuestionIndex);
+        return curentQuestion;
     }
 }

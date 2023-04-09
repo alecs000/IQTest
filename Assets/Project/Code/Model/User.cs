@@ -5,6 +5,7 @@ using UnityEngine;
 public class User
 {
     public string Username;
+    public float IQAmount;
     public string FieldOfKnowledge;
     public string FamilyStatus;
     public string HealthStatus;

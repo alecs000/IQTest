@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-    public abstract class BankDefault : MonoBehaviour
+    public abstract class BankDefault : MonoBehaviour, IObservable<Action<int>>
     {
         protected ObservableVariable<int> _bankValue;
         public int Value => _bankValue.Value;

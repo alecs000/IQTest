@@ -10,6 +10,7 @@ public class DataBase : MonoBehaviour
     private string _userID;
     private DatabaseReference _referenceDataBase;
     private User _currentUser;
+    public User CurrentUser => _currentUser;
     void Start()
     {
         _referenceDataBase = FirebaseDatabase.GetInstance("https://courceprojectiq-default-rtdb.asia-southeast1.firebasedatabase.app/").RootReference;
@@ -38,6 +39,17 @@ public class DataBase : MonoBehaviour
                 break;
         }
         AddData();
+    }
+    public IEnumerator AuthorizateUser(Action onUserAuthorizated)
+    {
+        _userID = authorization.User.UserId;
+        var userData = _referenceDataBase.Child(Users).Child(_userID).GetValueAsync();
+        yield return new WaitUntil(() => userData.IsCompleted);
+        if (userData != null)
+        {
+            _currentUser = JsonUtility.FromJson<User>((string)userData.Result.Value);
+            onUserAuthorizated?.Invoke();
+        }
     }
     public void CreateUser(string username)
     {
