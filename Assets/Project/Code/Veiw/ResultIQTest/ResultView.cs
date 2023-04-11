@@ -19,11 +19,17 @@ public class ResultView : UIView
     [SerializeField] private Image circleBar;
     [SerializeField] private UIView IQTestView;
     [SerializeField] private UIView SurveyView;
+    [SerializeField] private UIView SurveyNotificationView;
     [SerializeField] private ViewSwitch viewSwitch;
 
     private float _iqAmount;
     public override void Initialize()
     {
+        if (data.CurrentUser == null)
+        {
+            viewSwitch.Switch(SurveyNotificationView);
+            return;
+        }
         _iqAmount = data.CurrentUser.IQAmount;
         PlayIQAmountAnimation();
         PlayPercentAnimation();

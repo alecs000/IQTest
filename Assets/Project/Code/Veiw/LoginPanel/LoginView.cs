@@ -18,7 +18,7 @@ public class LoginView : UIView
     {
         viewSwitch.Switch(registration);
     }
-    public void GoToProfile()
+    public void TryGoToProfile()
     {
         viewSwitch.Switch(profile);
     }

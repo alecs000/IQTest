@@ -13,7 +13,6 @@ public class Login : MonoBehaviour
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private LoginView loginView;
 
-    private bool _isAutorizated;
 
     public void LoginIn()
     {
@@ -21,19 +20,11 @@ public class Login : MonoBehaviour
     }
     public void OnLogin()
     {
-        dataBase.AuthorizateUser(OnAutorizated);
+       StartCoroutine(dataBase.AuthorizateUser(OnAutorizated));
     }
     private void OnAutorizated()
     {
-        _isAutorizated = true;
-    }
-    private void Update()
-    {
-        if (_isAutorizated)
-        {
-            loginView.GoToProfile();
-            _isAutorizated = false;
-        }
+        loginView.TryGoToProfile();
     }
     public void OnLoginFailed(AuthError error)
     {

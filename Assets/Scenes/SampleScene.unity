@@ -2905,7 +2905,7 @@ MonoBehaviour:
   - {fileID: 1420000753}
   - {fileID: 3422346755129945152}
   - {fileID: 1702600298}
-  resultView: {fileID: 1702600298}
+  surveyNotificatiomView: {fileID: 812836293}
   dataBase: {fileID: 1408053518}
   authorization: {fileID: 1408053517}
 --- !u!1 &244757205
@@ -7583,7 +7583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u044C \u043E\u043F\u0440\u043E\u0441\n"
+  m_text: "\u0417\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u044C \u0442\u0435\u0441\u0442\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f7e8360dd0ff8c749b7b81b02c036309, type: 2}
   m_sharedMaterial: {fileID: 4057417308812421745, guid: f7e8360dd0ff8c749b7b81b02c036309, type: 2}
@@ -10368,10 +10368,10 @@ RectTransform:
   m_Father: {fileID: 2099985166}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -563, y: 431}
-  m_SizeDelta: {x: 541.3, y: 89.8}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -563, y: -1276}
+  m_SizeDelta: {x: -1378.7, y: 89.80005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1385751520
 MonoBehaviour:
@@ -13131,6 +13131,7 @@ RectTransform:
   - {fileID: 1167068899}
   - {fileID: 121190208}
   - {fileID: 1677159607}
+  - {fileID: 2024606614}
   m_Father: {fileID: 597472354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13368,6 +13369,7 @@ MonoBehaviour:
   circleBar: {fileID: 1394651795}
   IQTestView: {fileID: 3422346755129945152}
   SurveyView: {fileID: 1420000753}
+  SurveyNotificationView: {fileID: 812836293}
   viewSwitch: {fileID: 597472358}
 --- !u!1001 &1703354370
 PrefabInstance:
@@ -16077,6 +16079,7 @@ MonoBehaviour:
   _canvasGroupUIView: {fileID: 1997285286}
   timerForRetry: {fileID: 426538817}
   authorizationModule: {fileID: 1408053517}
+  emailInputRegistration: {fileID: 865877221}
   notificationText: {fileID: 1392924867}
   registrationView: {fileID: 1701592348}
   viewSwitch: {fileID: 597472358}
@@ -16175,6 +16178,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003952526}
+  m_CullTransparentMesh: 1
+--- !u!1 &2024606613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024606614}
+  - component: {fileID: 2024606616}
+  - component: {fileID: 2024606615}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2024606614
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024606613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1701592341}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0.00012207031, y: 674.3999}
+  m_SizeDelta: {x: 0, y: 1348}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2024606615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024606613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2024606616
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024606613}
   m_CullTransparentMesh: 1
 --- !u!1 &2027991959
 GameObject:
@@ -16563,7 +16642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   authorizationModule: {fileID: 1408053517}
-  dataBase: {fileID: 0}
+  dataBase: {fileID: 1408053518}
   emailInput: {fileID: 1791646632}
   passwordInput: {fileID: 920134605}
   loginView: {fileID: 2099985173}

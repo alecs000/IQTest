@@ -28,6 +28,7 @@ public class AuthorizationModule : MonoBehaviour
         _auth = FirebaseAuth.DefaultInstance;
         _auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
+        _auth.SignOut();
     }
 
     private void AuthStateChanged(object sender, EventArgs eventArgs)
@@ -76,7 +77,7 @@ public class AuthorizationModule : MonoBehaviour
                 return;
             }
             // Firebase _user has been created.
-            Firebase.Auth.FirebaseUser newUser = task.Result;
+            FirebaseUser newUser = task.Result;
             SendEmail(onCreatedAndEmailVerified);
             _isEmailSentButNotVerified = true;
             Debug.LogFormat("Firebase _user created successfully: {0} ({1})",
@@ -119,7 +120,7 @@ public class AuthorizationModule : MonoBehaviour
     public void SignIn(string email, string password, UnityAction onSignIn, UnityAction<AuthError> onFailed)
     {
         _isAutomaticAuthorization = false;
-        _auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        _auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {
@@ -129,14 +130,13 @@ public class AuthorizationModule : MonoBehaviour
             if (task.IsFaulted)
             {
                 onFailed?.Invoke((AuthError)(task.Exception.GetBaseException() as FirebaseException).ErrorCode);
-                //Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 return;
             }
 
-            Firebase.Auth.FirebaseUser newUser = task.Result;
-            onSignIn?.Invoke();
+            FirebaseUser newUser = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",
             newUser.DisplayName, newUser.UserId);
+            onSignIn?.Invoke();
         });
     }
     public void SendEmailReset(string emailAddress, UnityAction onCompleted, UnityAction<AuthError> onFailed)

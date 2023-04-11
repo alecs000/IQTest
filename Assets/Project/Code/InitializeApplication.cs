@@ -7,7 +7,7 @@ public class InitializeApplication : MonoBehaviour
     private const string LAST_ACTIVE_VIEW = "LastActiveView";
     [SerializeField] private ViewSwitch viewSwitch;
     [SerializeField] private UIView[] uIViews;
-    [SerializeField] private UIView resultView;
+    [SerializeField] private UIView surveyNotificatiomView;
     [SerializeField] private DataBase dataBase;
     [SerializeField] private AuthorizationModule authorization;
 
@@ -22,7 +22,10 @@ public class InitializeApplication : MonoBehaviour
     }
     private void OnUserDataBaseAuthorizate()
     {
-        TryOpenLastView();
+        if (TryOpenLastView())
+        {
+            viewSwitch.Switch(surveyNotificatiomView);
+        }
     }
     private bool TryOpenLastView()
     {

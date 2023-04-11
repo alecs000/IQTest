@@ -7,13 +7,15 @@ public class WaitEmailVerificationView : UIView
 {
     [SerializeField] private TimerForRetry timerForRetry;
     [SerializeField] private AuthorizationModule authorizationModule;
+    [SerializeField] private TMP_InputField emailInputRegistration;
+
     [SerializeField] private TMP_Text notificationText;
     [SerializeField] private UIView registrationView;
     [SerializeField] private ViewSwitch viewSwitch;
     public override void Initialize()
     {
         timerForRetry.StartTimer();
-        notificationText.text = $"Зайдите на почту {authorizationModule.User.Email}, и пререйдите по ссылке в письме, если письмо не приходит, то проверьте папку спам. ";
+        notificationText.text = $"Зайдите на почту {emailInputRegistration.text}, и пререйдите по ссылке в письме, если письмо не приходит, то проверьте папку спам. ";
     }
     public void RetryEmail()
     {
