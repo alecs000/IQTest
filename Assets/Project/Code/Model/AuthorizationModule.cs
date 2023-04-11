@@ -1,11 +1,13 @@
 using Firebase;
 using Firebase.Auth;
+using Firebase.Extensions;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class AuthorizationModule : MonoBehaviour
 {
+    public event UnityAction OnAutomaticAuthorization;
     private FirebaseAuth _auth;
     private FirebaseUser _user;
     private string _displayName;
@@ -14,6 +16,7 @@ public class AuthorizationModule : MonoBehaviour
 
     public FirebaseUser User => _user;
 
+    private bool _isAutomaticAuthorization = true;
     private bool _isEmailSentButNotVerified;
     private UnityAction _onEmailVerified;
     private void Awake()
@@ -43,6 +46,10 @@ public class AuthorizationModule : MonoBehaviour
                 _displayName = _user.DisplayName ?? "";
                 _emailAddress = _user.Email ?? "";
                 _photoUrl = _user.PhotoUrl ?? null;
+                if (_isAutomaticAuthorization)
+                {
+                    OnAutomaticAuthorization?.Invoke();
+                }
             }
         }
     }
@@ -54,7 +61,8 @@ public class AuthorizationModule : MonoBehaviour
     }
     public void CreateUser(string email, string password, UnityAction onCreatedAndEmailVerified, UnityAction<AuthError> onFailed)
     {
-        _auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        _isAutomaticAuthorization = false;
+        _auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {
@@ -110,6 +118,7 @@ public class AuthorizationModule : MonoBehaviour
     }
     public void SignIn(string email, string password, UnityAction onSignIn, UnityAction<AuthError> onFailed)
     {
+        _isAutomaticAuthorization = false;
         _auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)

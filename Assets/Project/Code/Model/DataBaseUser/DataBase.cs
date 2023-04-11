@@ -1,6 +1,7 @@
 using Firebase.Database;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DataBase : MonoBehaviour
@@ -11,7 +12,7 @@ public class DataBase : MonoBehaviour
     private DatabaseReference _referenceDataBase;
     private User _currentUser;
     public User CurrentUser => _currentUser;
-    void Start()
+    void Awake()
     {
         _referenceDataBase = FirebaseDatabase.GetInstance("https://courceprojectiq-default-rtdb.asia-southeast1.firebasedatabase.app/").RootReference;
     }
@@ -42,12 +43,16 @@ public class DataBase : MonoBehaviour
     }
     public IEnumerator AuthorizateUser(Action onUserAuthorizated)
     {
+        if (_referenceDataBase==null)
+        {
+            _referenceDataBase = FirebaseDatabase.GetInstance("https://courceprojectiq-default-rtdb.asia-southeast1.firebasedatabase.app/").RootReference;
+        }
         _userID = authorization.User.UserId;
         var userData = _referenceDataBase.Child(Users).Child(_userID).GetValueAsync();
         yield return new WaitUntil(() => userData.IsCompleted);
         if (userData != null)
         {
-            _currentUser = JsonUtility.FromJson<User>((string)userData.Result.Value);
+            _currentUser = JsonUtility.FromJson<User>(userData.Result.GetRawJsonValue());
             onUserAuthorizated?.Invoke();
         }
     }

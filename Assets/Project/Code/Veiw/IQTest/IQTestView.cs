@@ -29,7 +29,6 @@ public class IQTestView : UIView
     private bool _isCurrentQuestionHaveStringAnswer;
     private void Start()
     {
-        Initialize();
         _surveyChoiseLogic = new(toggles);
     }
     public override void Initialize()
@@ -76,7 +75,8 @@ public class IQTestView : UIView
         }
         else
         {
-            testExecutor.InsertTestData(_surveyChoiseLogic.CurrentToggle.Lable.text);
+            string answerNotNull = _surveyChoiseLogic.CurrentToggle != null ? _surveyChoiseLogic.CurrentToggle.Lable.text : "";
+            testExecutor.InsertTestData(answerNotNull);
         }
     }
     private void ActivateQustion(DefaultIQQuestionScriptableObject question)

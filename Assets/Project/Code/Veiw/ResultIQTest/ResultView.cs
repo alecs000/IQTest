@@ -21,8 +21,10 @@ public class ResultView : UIView
     [SerializeField] private UIView SurveyView;
     [SerializeField] private ViewSwitch viewSwitch;
 
+    private float _iqAmount;
     public override void Initialize()
     {
+        _iqAmount = data.CurrentUser.IQAmount;
         PlayIQAmountAnimation();
         PlayPercentAnimation();
         PlayCircleAnimation();
@@ -42,7 +44,7 @@ public class ResultView : UIView
             iQAmount = x;
             iQAmountText.text = iQAmount.ToString()+ " IQ";
         }
-        , data.CurrentUser.IQAmount, duration);
+        , _iqAmount, duration);
     }
     private void PlayPercentAnimation()
     {
@@ -52,7 +54,7 @@ public class ResultView : UIView
             iQPercentAmount = x;
             iQPercentText.text = $"Лучше чем {iQPercentAmount}%";
         }
-       , data.CurrentUser.IQAmount* iQInOnePercent, duration);
+       , _iqAmount * iQInOnePercent, duration);
     }
     private void PlayCircleAnimation()
     {

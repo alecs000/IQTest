@@ -25,6 +25,8 @@ public class CanvasSetter
             _curentCanvas.alpha = 0;
             _curentCanvas.gameObject.SetActive(false);
         }
+        if (newGroup == _curentCanvas)
+            return;
         _curentCanvas = newGroup;
         _curentCanvas.gameObject.SetActive(true);
         _curentCanvas.DOFade(1, _durationForView);

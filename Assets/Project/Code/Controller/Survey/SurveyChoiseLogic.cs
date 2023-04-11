@@ -21,10 +21,7 @@ public class SurveyChoiseLogic
     {
         if (CurrentToggle!= null)
         {
-            Toggle currentToggle = _currentToggle.Toggle;
-            _currentToggle = null;
-            currentToggle.isOn = false;
-            currentToggle.interactable = true;
+            OnToggleValueChange(null, true);
         }
     }
     private void OnToggleValueChange(CustomToggle newToggle, bool value)
@@ -37,6 +34,10 @@ public class SurveyChoiseLogic
                 _currentToggle.Toggle.interactable = true;
             }
             _currentToggle = newToggle;
+            if (newToggle == null)
+            {
+                return;
+            }
             _currentToggle.Toggle.interactable = false;
         }
     }

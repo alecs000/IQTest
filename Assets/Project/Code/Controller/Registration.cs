@@ -1,7 +1,4 @@
 using Firebase.Auth;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +14,7 @@ public class Registration : MonoBehaviour
     [Header("Module")]
     [SerializeField] private AuthorizationModule authorization;
     [SerializeField] private DataBase dataBase;
+
     public void OnRegistrationClick()
     {
         authorization.CreateUser(emailInput.text, passwordInput.text, OnUserCreated, OnFailed);
@@ -29,6 +27,8 @@ public class Registration : MonoBehaviour
     }
     private void OnFailed(AuthError error)
     {
+        registrationView.GoToRegistration();
+
         switch (error)
         {
             case AuthError.EmailAlreadyInUse:
@@ -42,5 +42,4 @@ public class Registration : MonoBehaviour
                 break;
         }
     }
-
 }

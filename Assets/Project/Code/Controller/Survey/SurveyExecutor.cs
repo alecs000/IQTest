@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class SurveyExecutor : DefaultTestLogic<SurveyQuestionScriptableObject>
 {
-    private const string SurveyText = "Survey";
     [SerializeField] private DataBase dataBase;
     public override SurveyQuestionScriptableObject InitializeFirstQuestion()
     {
         SurveyQuestionScriptableObject curentQuestion = base.InitializeFirstQuestion();
-        if (PlayerPrefs.HasKey(SurveyText))
-        {
-            _curentQuestionIndex = PlayerPrefs.GetInt(SurveyText);
-        }
         return curentQuestion;
     }
     public void SendDataInDataBase(string answerInSurvey)
@@ -27,7 +22,6 @@ public class SurveyExecutor : DefaultTestLogic<SurveyQuestionScriptableObject>
     public override SurveyQuestionScriptableObject SwitchQuestionToNext()
     {
         SurveyQuestionScriptableObject curentQuestion = base.SwitchQuestionToNext();
-        PlayerPrefs.SetInt(SurveyText, _curentQuestionIndex);
         return curentQuestion;
     }
 }

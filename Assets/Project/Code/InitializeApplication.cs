@@ -7,15 +7,31 @@ public class InitializeApplication : MonoBehaviour
     private const string LAST_ACTIVE_VIEW = "LastActiveView";
     [SerializeField] private ViewSwitch viewSwitch;
     [SerializeField] private UIView[] uIViews;
+    [SerializeField] private UIView resultView;
+    [SerializeField] private DataBase dataBase;
+    [SerializeField] private AuthorizationModule authorization;
 
     private int _indexViewForSave;
+    private void Awake()
+    {
+        authorization.OnAutomaticAuthorization +=() =>StartCoroutine(dataBase.AuthorizateUser(OnUserDataBaseAuthorizate));
+    }
     private void Start()
+    {
+        viewSwitch.AddObserver(OnViewSwitched);
+    }
+    private void OnUserDataBaseAuthorizate()
+    {
+        TryOpenLastView();
+    }
+    private bool TryOpenLastView()
     {
         if (PlayerPrefs.HasKey(LAST_ACTIVE_VIEW))
         {
             viewSwitch.Switch(uIViews[PlayerPrefs.GetInt(LAST_ACTIVE_VIEW)]);
+            return true;
         }
-        viewSwitch.AddObserver(OnViewSwitched);
+        return false;
     }
     private void OnViewSwitched(int index)
     {

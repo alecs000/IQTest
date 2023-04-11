@@ -13,6 +13,10 @@ public class RegistrationView : UIView
     {
         
     }
+    public void GoToRegistration()
+    {
+        viewSwitch.Switch(this);
+    }
     public void GoToLogin()
     {
         viewSwitch.Switch(loginView);

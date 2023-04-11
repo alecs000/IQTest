@@ -11,12 +11,11 @@ public class SurveyView : UIView
     [SerializeField] private SurveyExecutor surveyExecutor;
     [SerializeField] private CanvasGroup nextButton;
     [SerializeField] private CanvasGroup finishButton;
+    [SerializeField] private UIView IQTestView;
+    [SerializeField] private ViewSwitch viewSwitch;
 
     private SurveyChoiseLogic _surveyChoiseLogic;
-    private void Start()
-    {
-        Initialize();
-    }
+
     public override void Initialize()
     {
         _surveyChoiseLogic = new(toggles);
@@ -53,7 +52,10 @@ public class SurveyView : UIView
     }
     public void OnSurveyFinidhed()
     {
+        if (_surveyChoiseLogic.CurrentToggle == null)
+            return;
         surveyExecutor.SendDataInDataBase(_surveyChoiseLogic.CurrentToggle.Lable.text);
+        viewSwitch.Switch(IQTestView);
     }
     private void UpdateText(SurveyQuestionScriptableObject question)
     {
