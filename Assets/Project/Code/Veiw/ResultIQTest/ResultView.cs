@@ -17,7 +17,7 @@ public class ResultView : UIView
     [SerializeField] private TMP_Text iQAmountText;
     [SerializeField] private TMP_Text iQPercentText;
     [SerializeField] private Image circleBar;
-    [SerializeField] private UIView IQTestView;
+    [SerializeField] private IQTestView IQTestView;
     [SerializeField] private UIView SurveyView;
     [SerializeField] private UIView SurveyNotificationView;
     [SerializeField] private ViewSwitch viewSwitch;
@@ -37,11 +37,12 @@ public class ResultView : UIView
     }
     public void GoToIQTest()
     {
+        IQTestView.Reset();
         viewSwitch.Switch(IQTestView);
     }
     public void GoToSurvey()
     {
-        viewSwitch.Switch(IQTestView);
+        viewSwitch.Switch(SurveyNotificationView);
     }
     private void PlayIQAmountAnimation()
     {

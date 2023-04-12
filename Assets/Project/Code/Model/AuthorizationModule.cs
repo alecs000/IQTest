@@ -28,7 +28,6 @@ public class AuthorizationModule : MonoBehaviour
         _auth = FirebaseAuth.DefaultInstance;
         _auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
-        _auth.SignOut();
     }
 
     private void AuthStateChanged(object sender, EventArgs eventArgs)

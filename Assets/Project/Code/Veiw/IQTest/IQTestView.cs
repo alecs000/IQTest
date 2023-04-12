@@ -53,6 +53,12 @@ public class IQTestView : UIView
         _surveyChoiseLogic.RefreshToggle();
         ActivateQustion(question);
     }
+    public void Reset()
+    {
+        testExecutor.Reset();
+        CanvasSetter.TurnOffCanvasGroup(finishButton);
+        CanvasSetter.TurnOnCanvasGroup(nextButton);
+    }
     private void TryLastQuestionButtonActivate()
     {
         if (testExecutor.LastQuestionIndex == testExecutor.CurentQuestionIndex)
@@ -98,6 +104,7 @@ public class IQTestView : UIView
         {
             ActivateStringAnswer(question as StringAnswerIQQuestionScriptableObject);
             DeactivateOptionAnswers();
+            picture.gameObject.SetActive(false);
         }
         else
         {

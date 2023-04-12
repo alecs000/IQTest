@@ -32,6 +32,11 @@ public class IQTestExecutor : DefaultTestLogic<DefaultIQQuestionScriptableObject
         _IQTestData.TestResults.RemoveAt(_IQTestData.TestResults.Count - 1);
         return base.SwitchQuestionToPrevious();
     }
+    public void Reset()
+    {
+        _IQTestData.TestResults.Clear();
+        _curentQuestionIndex = 0;
+    }
     private void OnApplicationQuit()
     {
         _storageService.Save(IQTestKeyData, _IQTestData);
