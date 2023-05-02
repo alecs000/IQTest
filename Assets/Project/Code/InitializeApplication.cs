@@ -22,15 +22,17 @@ public class InitializeApplication : MonoBehaviour
     }
     private void OnUserDataBaseAuthorizate()
     {
-        if (TryOpenLastView())
+        if (!TryOpenLastView())
         {
             viewSwitch.Switch(surveyNotificatiomView);
         }
     }
     private bool TryOpenLastView()
     {
+        Debug.Log("TryOpenLastView");
         if (PlayerPrefs.HasKey(LAST_ACTIVE_VIEW))
         {
+            Debug.Log($"OpenLastView : {PlayerPrefs.GetInt(LAST_ACTIVE_VIEW)}");
             viewSwitch.Switch(uIViews[PlayerPrefs.GetInt(LAST_ACTIVE_VIEW)]);
             return true;
         }
@@ -39,13 +41,11 @@ public class InitializeApplication : MonoBehaviour
     private void OnViewSwitched(int index)
     {
         _indexViewForSave = index;
+        Debug.Log($"OpenLastView - {_indexViewForSave}");
+        PlayerPrefs.SetInt(LAST_ACTIVE_VIEW, _indexViewForSave);
     }
     private void OnDestroy()
     {
         viewSwitch.RemoveObserver(OnViewSwitched);
-    }
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt(LAST_ACTIVE_VIEW, _indexViewForSave);
     }
 }

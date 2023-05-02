@@ -10,7 +10,6 @@ public class User
     public string FamilyStatus;
     public string HealthStatus;
     public string MaritalStatus;
-    public string SphereOfKnowledge;
     public string TypeOfPerception;
     public string SpiritualStatus;
 

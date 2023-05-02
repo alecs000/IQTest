@@ -27,7 +27,7 @@ public class IQTestView : UIView
 
     private SurveyChoiseLogic _surveyChoiseLogic;
     private bool _isCurrentQuestionHaveStringAnswer;
-    private void Start()
+    private void Awake()
     {
         _surveyChoiseLogic = new(toggles);
     }
@@ -124,6 +124,10 @@ public class IQTestView : UIView
             {
                 toggles[i].gameObject.SetActive(false);
             }
+        }
+        if(_surveyChoiseLogic == null)
+        {
+            _surveyChoiseLogic = new(toggles);
         }
         _isCurrentQuestionHaveStringAnswer = false;
         _surveyChoiseLogic.RefreshToggle();

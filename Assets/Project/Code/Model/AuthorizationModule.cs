@@ -21,6 +21,7 @@ public class AuthorizationModule : MonoBehaviour
     private UnityAction _onEmailVerified;
     private void Awake()
     {
+        Debug.Log("Inter");
         InitializeFirebase();
     }
     private void InitializeFirebase()
@@ -48,6 +49,7 @@ public class AuthorizationModule : MonoBehaviour
                 _photoUrl = _user.PhotoUrl ?? null;
                 if (_isAutomaticAuthorization)
                 {
+                    Debug.Log($"_isAutomaticAuthorization: {_isAutomaticAuthorization}");
                     OnAutomaticAuthorization?.Invoke();
                 }
             }
@@ -130,7 +132,7 @@ public class AuthorizationModule : MonoBehaviour
             {
                 onFailed?.Invoke((AuthError)(task.Exception.GetBaseException() as FirebaseException).ErrorCode);
                 return;
-            }
+            }   
 
             FirebaseUser newUser = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",

@@ -1,7 +1,4 @@
 using DG.Tweening;
-using Newtonsoft.Json.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,9 +44,10 @@ public class ResultView : UIView
     private void PlayIQAmountAnimation()
     {
         float iQAmount = 0;
-        DOTween.To(() => iQAmount, x => {
+        DOTween.To(() => iQAmount, x =>
+        {
             iQAmount = x;
-            iQAmountText.text = iQAmount.ToString()+ " IQ";
+            iQAmountText.text = iQAmount.ToString() + " IQ";
         }
         , _iqAmount, duration);
     }
@@ -57,7 +55,8 @@ public class ResultView : UIView
     {
         float iQInOnePercent = maximumIQ / 100;
         float iQPercentAmount = 0;
-        DOTween.To(() => iQPercentAmount, x => {
+        DOTween.To(() => iQPercentAmount, x =>
+        {
             iQPercentAmount = x;
             iQPercentText.text = $"Лучше чем {iQPercentAmount}%";
         }

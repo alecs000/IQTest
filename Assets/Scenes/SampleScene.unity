@@ -6319,7 +6319,6 @@ GameObject:
   - component: {fileID: 844892825}
   - component: {fileID: 844892830}
   - component: {fileID: 844892829}
-  - component: {fileID: 844892828}
   - component: {fileID: 844892827}
   - component: {fileID: 844892826}
   - component: {fileID: 844892832}
@@ -6384,18 +6383,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &844892828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844892824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edcc1fd6fd078ac4eaea5461c741fad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &844892829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13100,7 +13087,6 @@ GameObject:
   - component: {fileID: 1701592343}
   - component: {fileID: 1701592342}
   - component: {fileID: 1701592344}
-  - component: {fileID: 1701592345}
   - component: {fileID: 1701592346}
   - component: {fileID: 1701592347}
   - component: {fileID: 1701592348}
@@ -13197,18 +13183,6 @@ MonoBehaviour:
   registrationView: {fileID: 1701592348}
   authorization: {fileID: 1408053517}
   dataBase: {fileID: 1408053518}
---- !u!114 &1701592345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701592340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edcc1fd6fd078ac4eaea5461c741fad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1701592346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16512,7 +16486,6 @@ GameObject:
   - component: {fileID: 2099985166}
   - component: {fileID: 2099985171}
   - component: {fileID: 2099985170}
-  - component: {fileID: 2099985169}
   - component: {fileID: 2099985168}
   - component: {fileID: 2099985167}
   - component: {fileID: 2099985172}
@@ -16579,18 +16552,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &2099985169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099985165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edcc1fd6fd078ac4eaea5461c741fad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2099985170
 MonoBehaviour:
   m_ObjectHideFlags: 0

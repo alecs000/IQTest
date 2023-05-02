@@ -20,13 +20,13 @@ public class CanvasSetter
 
     public void SetCanvasGroup(CanvasGroup newGroup)
     {
+        if (newGroup == _curentCanvas)
+            return;
         if (_curentCanvas != null)
         {
             _curentCanvas.alpha = 0;
             _curentCanvas.gameObject.SetActive(false);
         }
-        if (newGroup == _curentCanvas)
-            return;
         _curentCanvas = newGroup;
         _curentCanvas.gameObject.SetActive(true);
         _curentCanvas.DOFade(1, _durationForView);
