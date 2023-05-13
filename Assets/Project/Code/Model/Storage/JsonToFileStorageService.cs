@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using UnityEngine;
@@ -16,7 +15,7 @@ public class JsonToFileStorageService : IStorageServic
         using (var fileStream = new StreamReader(path))
         {
             string json = fileStream.ReadToEnd();
-            var data = JsonConvert.DeserializeObject<T>(json);
+            var data = JsonUtility.FromJson<T>(json);
 
             callback?.Invoke(data);
         }
@@ -25,7 +24,7 @@ public class JsonToFileStorageService : IStorageServic
     public void Save(string key, object data, Action<bool> callback = null)
     {
         string path = BuildPath(key);
-        string json = JsonConvert.SerializeObject(data);
+        string json = JsonUtility.ToJson(data);
         using (var fileStream = new StreamWriter(path))
         {
             fileStream.Write(json);

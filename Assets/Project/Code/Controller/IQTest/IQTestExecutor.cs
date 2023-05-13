@@ -17,8 +17,8 @@ public class IQTestExecutor : DefaultTestLogic<DefaultIQQuestionScriptableObject
         _curentQuestionIndex = 0;
         if (_IQTestData.TestResults.Count > 0)
         {
-            _curentQuestionIndex = _IQTestData.TestResults.Count - 1;
-            _IQTestData.TestResults.RemoveAt(_IQTestData.TestResults.Count - 1);
+            _curentQuestionIndex = _IQTestData.TestResults.Count-1;
+            _IQTestData.TestResults.RemoveAt(_IQTestData.TestResults.Count-1);
         }
         return CurentQuestion;
     }

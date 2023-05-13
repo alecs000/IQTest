@@ -4,6 +4,7 @@ using Firebase.Extensions;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class AuthorizationModule : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class AuthorizationModule : MonoBehaviour
     private void InitializeFirebase()
     {
         _auth = FirebaseAuth.DefaultInstance;
+        _auth.SignOut();
         _auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
     }
