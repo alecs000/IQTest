@@ -1,4 +1,4 @@
-Rustore: https://apps.rustore.ru/search?query=IQ+Test
+[Rustore](https://apps.rustore.ru/app/com.HWProject.CourceProjectIQ)
 
 Движок: Unity
 
